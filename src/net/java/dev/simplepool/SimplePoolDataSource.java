@@ -80,8 +80,6 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * See {@link javax.sql.DataSource#getConnection()}.
-     *
-     * @see javax.sql.DataSource#getConnection()
      */
     public Connection getConnection() throws SQLException {
 
@@ -99,8 +97,6 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * See {@link javax.sql.DataSource#getConnection(String, String)}.
-     *
-     * @see javax.sql.DataSource#getConnection(String, String)
      */
     public Connection getConnection(String username, String password)
             throws SQLException {
@@ -111,8 +107,6 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * See {@link javax.sql.DataSource#setLogWriter(PrintWriter)}.
-     *
-     * @see javax.sql.DataSource#setLogWriter(PrintWriter)
      */
     public void setLogWriter(PrintWriter out) throws SQLException {
         logWriter = out;
@@ -120,8 +114,6 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * See {@link javax.sql.DataSource#getLogWriter}.
-     *
-     * @see javax.sql.DataSource#getLogWriter
      */
     public PrintWriter getLogWriter() {
         return logWriter;
@@ -129,16 +121,12 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * See {@link javax.sql.DataSource#setLoginTimeout(int)}.
-     *
-     * @see javax.sql.DataSource#setLoginTimeout(int)
      */
     public void setLoginTimeout(int seconds) throws SQLException {
     }
 
     /**
      * See {@link javax.sql.DataSource#getLoginTimeout}.
-     *
-     * @see javax.sql.DataSource#getLoginTimeout
      */
     public int getLoginTimeout() {
         return 0;
@@ -154,13 +142,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the JDBC driver.
+     *
+     * @param driver The JDBC driver. e.g. 'com.mysql.jdbc.Driver'
+     *
+     * @see #getDriver()
      */
-    public void setDriver(String val) {
-        driver = val;
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
     /**
      * Gets the JDBC driver.
+     *
+     * @return The JDBC driver string.
+     *
+     * @see #setDriver(String)
      */
     public String getDriver() {
         return driver;
@@ -168,13 +164,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the JDBC connect string.
+     *
+     * @param jdbcUrl The JDBC connection URL string. e.g. 'jdbc:mysql://localhost:3306/dbname'
+     *
+     * @see #getJdbcUrl()
      */
-    public void setJdbcUrl(String val) {
-        jdbcUrl = val;
+    public void setJdbcUrl(String jdbcUrl) {
+        this.jdbcUrl = jdbcUrl;
     }
 
     /**
-     * Sets the JDBC connect string.
+     * Gets the JDBC connect string.
+     *
+     * @return The JDBC connection URL string.
+     *
+     * @see #setJdbcUrl(String)
      */
     public String getJdbcUrl() {
         return jdbcUrl;
@@ -182,13 +186,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the database login name.
+     *
+     * @param user The database login name. e.g. 'Scott'
+     *
+     * @see #getUser()
      */
-    public void setUser(String val) {
-        user = val;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /**
      * Gets the database login name.
+     *
+     * @return The login name string.
+     *
+     * @see #setUser(String)
      */
     public String getUser() {
         return user;
@@ -196,13 +208,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the database password.
+     *
+     * @param password The database password. e.g. 'Tiger'
+     *
+     * @see #getPassword()
      */
-    public void setPassword(String val) {
-        password = val;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
      * Gets the database password.
+     *
+     * @return The password string.
+     *
+     * @see #setPassword(String)
      */
     public String getPassword() {
         return password;
@@ -210,13 +230,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the minimum number of connections to start with.
+     *
+     * @param minConns The minimum number of connections.
+     *
+     * @see #getMinConns()
      */
-    public void setMinConns(String val) {
-        minConns = val;
+    public void setMinConns(String minConns) {
+        this.minConns = minConns;
     }
 
     /**
      * Gets the minimum number of connections to start with.
+     *
+     * @return The minimum number of connections string.
+     *
+     * @see #setMinConns(String)
      */
     public String getMinConns() {
         return minConns;
@@ -224,13 +252,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the maximum number of connections in dynamic pool.
+     *
+     * @param maxConns The maximum number of connections.
+     *
+     * @see #getMaxConns()
      */
-    public void setMaxConns(String val) {
-        maxConns = val;
+    public void setMaxConns(String maxConns) {
+        this.maxConns = maxConns;
     }
 
     /**
      * Gets the maximum number of connections in dynamic pool.
+     *
+     * @return The maximum number of connection string.
+     *
+     * @see #setMaxConns(String)
      */
     public String getMaxConns() {
         return maxConns;
@@ -238,13 +274,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the time in days between connection resets.
+     *
+     * @param maxConnTime The maximum connection time.
+     *
+     * @see #getMaxConnTime()
      */
-    public void setMaxConnTime(String val) {
-        maxConnTime = val;
+    public void setMaxConnTime(String maxConnTime) {
+        this.maxConnTime = maxConnTime;
     }
 
     /**
      * Gets the time in days between connection resets.
+     *
+     * @return The maximum connection time string.
+     *
+     * @see #setMaxConnTime(String)
      */
     public String getMaxConnTime() {
         return maxConnTime;
@@ -252,13 +296,21 @@ public class SimplePoolDataSource implements DataSource {
 
     /**
      * Sets the max time a connection can be checked out before being recycled.
+     *
+     * @param maxCheckoutSeconds The maximum number of seconds to wait before recycling a connection.
+     *
+     * @see #getMaxCheckoutSeconds()
      */
-    public void setMaxCheckoutSeconds(String val) {
-        maxCheckoutSeconds = val;
+    public void setMaxCheckoutSeconds(String maxCheckoutSeconds) {
+        this.maxCheckoutSeconds = maxCheckoutSeconds;
     }
 
     /**
-     * Sets the max time a connection can be checked out before being recycled.
+     * Gets the max time a connection can be checked out before being recycled.
+     *
+     * @return The maximum checkout time string.
+     *
+     * @see #setMaxCheckoutSeconds(String)
      */
     public String getMaxCheckoutSeconds() {
         return maxCheckoutSeconds;

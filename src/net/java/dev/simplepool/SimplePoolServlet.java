@@ -72,6 +72,20 @@ public class SimplePoolServlet extends HttpServlet {
 
     /**
      * Initializes the connection pool.
+     * <p/>
+     * The required intialization parameters are:
+     * <p/>
+     * <ul>
+     * <li><code>varName</code> &ndash; Name of the variable used to hold a reference to the {@link SimplePoolDataSource}.</li>
+     * <li><code>driver</code> &ndash; JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'</li>
+     * <li><code>jdbcUrl</code> &ndash; JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'</li>
+     * <li><code>user</code> &ndash; Database login name. e.g. 'Scott'</li>
+     * <li><code>password</code> &ndash; Database password. e.g. 'Tiger'</li>
+     * <li><code>minConns</code> &ndash; Minimum number of connections to start with.</li>
+     * <li><code>maxConns</code> &ndash; Maximum number of connections in dynamic pool.</li>
+     * <li><code>maxConnTime</code> &ndash; Time in days between connection resets.</li>
+     * <li><code>maxCheckoutSeconds</code> &ndash; Max time a connection can be checked out before being recycled.</li>
+     * </ul>
      *
      * @see javax.servlet.http.HttpServlet#init(ServletConfig)
      */

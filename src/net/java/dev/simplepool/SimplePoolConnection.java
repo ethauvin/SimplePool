@@ -67,8 +67,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setAutoCommit(boolean)}.
-     *
-     * @see java.sql.Connection#setAutoCommit(boolean)
      */
     public void setAutoCommit(boolean autoCommit)
             throws SQLException {
@@ -77,8 +75,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getAutoCommit}.
-     *
-     * @see java.sql.Connection#getAutoCommit
      */
     public boolean getAutoCommit()
             throws SQLException {
@@ -87,8 +83,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setCatalog(String)}.
-     *
-     * @see java.sql.Connection#setCatalog(String)
      */
     public void setCatalog(String catalog)
             throws SQLException {
@@ -97,8 +91,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getCatalog()}.
-     *
-     * @see java.sql.Connection#getCatalog()
      */
     public String getCatalog()
             throws SQLException {
@@ -107,8 +99,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#isClosed}.
-     *
-     * @see java.sql.Connection#isClosed
      */
     public boolean isClosed()
             throws SQLException {
@@ -117,8 +107,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setHoldability(int)}.
-     *
-     * @see java.sql.Connection#setHoldability(int)
      */
     public void setHoldability(int holdability)
             throws SQLException {
@@ -127,8 +115,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getHoldability}.
-     *
-     * @see java.sql.Connection#getHoldability
      */
     public int getHoldability()
             throws SQLException {
@@ -137,8 +123,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getMetaData}.
-     *
-     * @see java.sql.Connection#getMetaData
      */
     public DatabaseMetaData getMetaData()
             throws SQLException {
@@ -147,8 +131,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setReadOnly(boolean)}.
-     *
-     * @see java.sql.Connection#setReadOnly(boolean)
      */
     public void setReadOnly(boolean readOnly)
             throws SQLException {
@@ -157,8 +139,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#isReadOnly}.
-     *
-     * @see java.sql.Connection#isReadOnly
      */
     public boolean isReadOnly()
             throws SQLException {
@@ -167,8 +147,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setSavepoint}.
-     *
-     * @see java.sql.Connection#setSavepoint
      */
     public Savepoint setSavepoint()
             throws SQLException {
@@ -177,8 +155,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setSavepoint(String)}.
-     *
-     * @see java.sql.Connection#setSavepoint(String)
      */
     public Savepoint setSavepoint(String savepoint)
             throws SQLException {
@@ -187,8 +163,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setTransactionIsolation(int)}.
-     *
-     * @see java.sql.Connection#setTransactionIsolation(int)
      */
     public void setTransactionIsolation(int level)
             throws SQLException {
@@ -197,8 +171,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getTransactionIsolation}.
-     *
-     * @see java.sql.Connection#getTransactionIsolation
      */
     public int getTransactionIsolation()
             throws SQLException {
@@ -207,8 +179,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#setTypeMap(Map)}.
-     *
-     * @see java.sql.Connection#setTypeMap(Map)
      */
     public void setTypeMap(Map map)
             throws SQLException {
@@ -217,8 +187,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getTypeMap}.
-     *
-     * @see java.sql.Connection#getTypeMap
      */
     public Map getTypeMap()
             throws SQLException {
@@ -227,8 +195,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#getWarnings}.
-     *
-     * @see java.sql.Connection#getWarnings
      */
     public SQLWarning getWarnings()
             throws SQLException {
@@ -237,8 +203,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#clearWarnings}.
-     *
-     * @see java.sql.Connection#clearWarnings
      */
     public void clearWarnings()
             throws SQLException {
@@ -247,8 +211,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#close}.
-     *
-     * @see java.sql.Connection#close
      */
     public void close()
             throws SQLException {
@@ -257,8 +219,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#commit}.
-     *
-     * @see java.sql.Connection#commit
      */
     public void commit()
             throws SQLException {
@@ -267,8 +227,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#createStatement}.
-     *
-     * @see java.sql.Connection#createStatement
      */
     public Statement createStatement()
             throws SQLException {
@@ -277,8 +235,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#createStatement(int, int)}.
-     *
-     * @see java.sql.Connection#createStatement(int, int)
      */
     public Statement createStatement(int resultSetType, int resultSetConcurrency)
             throws SQLException {
@@ -287,8 +243,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#createStatement(int, int, int)}.
-     *
-     * @see java.sql.Connection#createStatement(int, int, int)
      */
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability)
             throws SQLException {
@@ -297,8 +251,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#nativeSQL(String)}.
-     *
-     * @see java.sql.Connection#nativeSQL(String)
      */
     public String nativeSQL(String sql)
             throws SQLException {
@@ -307,8 +259,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareCall(String)}.
-     *
-     * @see java.sql.Connection#prepareCall(String)
      */
     public CallableStatement prepareCall(String sql)
             throws SQLException {
@@ -317,8 +267,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareCall(String, int, int)}.
-     *
-     * @see java.sql.Connection#prepareCall(String, int, int)
      */
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency)
             throws SQLException {
@@ -327,8 +275,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareCall(String, int, int, int)}.
-     *
-     * @see java.sql.Connection#prepareCall(String, int, int, int)
      */
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
             throws SQLException {
@@ -337,8 +283,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String)}.
-     *
-     * @see java.sql.Connection#prepareStatement(String)
      */
     public PreparedStatement prepareStatement(String sql)
             throws SQLException {
@@ -347,8 +291,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String)}.
-     *
-     * @see java.sql.Connection#prepareStatement(String)
      */
     public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys)
             throws SQLException {
@@ -357,8 +299,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String, int, int)}.
-     *
-     * @see java.sql.Connection#prepareStatement(String, int, int)
      */
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency)
             throws SQLException {
@@ -367,8 +307,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String, int, int, int)}.
-     *
-     * @see java.sql.Connection#prepareStatement(String, int, int, int)
      */
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
             throws SQLException {
@@ -377,8 +315,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String, int[])}.
-     *
-     * @see java.sql.Connection#prepareStatement(String, int[])
      */
     public PreparedStatement prepareStatement(String sql, int[] columnIndexes)
             throws SQLException {
@@ -387,8 +323,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#prepareStatement(String, String[])}.
-     *
-     * @see java.sql.Connection#prepareStatement(String, String[])
      */
     public PreparedStatement prepareStatement(String sql, String[] columnNames)
             throws SQLException {
@@ -397,8 +331,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#releaseSavepoint(Savepoint)}.
-     *
-     * @see java.sql.Connection#releaseSavepoint(Savepoint)
      */
     public void releaseSavepoint(Savepoint savepoint)
             throws SQLException {
@@ -407,8 +339,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#rollback}.
-     *
-     * @see java.sql.Connection#rollback
      */
     public void rollback()
             throws SQLException {
@@ -417,8 +347,6 @@ public class SimplePoolConnection implements Connection {
 
     /**
      * See {@link java.sql.Connection#rollback(Savepoint)}.
-     *
-     * @see java.sql.Connection#rollback(Savepoint)
      */
     public void rollback(Savepoint savepoint)
             throws SQLException {

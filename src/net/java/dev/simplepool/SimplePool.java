@@ -64,7 +64,7 @@ public class SimplePool implements Runnable {
 
 
     /**
-     * Creates a new Connection Broker.
+     * Creates a new Connection Pool.
      *
      * @param driver             JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'
      * @param jdbcUrl            JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'
@@ -75,6 +75,8 @@ public class SimplePool implements Runnable {
      * @param maxConnTime        Time in days between connection resets. (Reset does a basic cleanup)
      * @param maxCheckoutSeconds Max time a connection can be checked out before being recycled. Zero value turns option
      *                           off, default is 60 seconds.
+     *
+     * @throws IOException If the pool cannot be created.
      */
     public SimplePool(String driver, String jdbcUrl, String user,
                       String password, int minConns, int maxConns, double maxConnTime, int maxCheckoutSeconds)
@@ -280,6 +282,8 @@ public class SimplePool implements Runnable {
      * If the min number of threads are ever exhausted, new threads are added up the the max thread count. Finally, if
      * all threads are in use, this method waits 2 seconds and tries again, up to ten times. After that, it returns a
      * null.
+     *
+     * @return A connection from the pool.
      */
     public Connection getConnection() {
 
@@ -362,6 +366,10 @@ public class SimplePool implements Runnable {
 
     /**
      * Returns the local JDBC ID for a connection.
+     *
+     * @param conn The connection object.
+     *
+     * @return The local JDBC ID for the connection.
      */
     public int idOfConnection(Connection conn) {
         int match = -1;
@@ -384,6 +392,10 @@ public class SimplePool implements Runnable {
 
     /**
      * Frees a connection. Replaces connection back into the main pool for reuse.
+     *
+     * @param conn The connection object.
+     *
+     * @return  A status or empty string.
      */
     public String freeConnection(Connection conn) {
         String res = "";
@@ -403,6 +415,10 @@ public class SimplePool implements Runnable {
 
     /**
      * Returns the age of a connection -- the time since it was handed out to an application.
+     *
+     * @param conn The connection object.
+     *
+     * @return The age of the connection.
      */
     public long getAge(Connection conn) { // Returns the age of the connection in millisec.
         int thisconn = idOfConnection(conn);
@@ -536,6 +552,8 @@ public class SimplePool implements Runnable {
      * This method could be reduced to return a counter that is maintained by all methods that update connStatus.
      * However, it is more efficient to do it this way because: Updating the counter would put an additional burden on
      * the most frequently used methods; in comparison, this method is rarely used (although essential).
+     *
+     * @return The number of connections in use.
      */
     public int getUseCount() {
         int useCount = 0;
@@ -551,6 +569,8 @@ public class SimplePool implements Runnable {
 
     /**
      * Returns the number of connections in the dynamic pool.
+     *
+     * @return The number of connections in the pool.
      */
     public int getSize() {
         return currConnections;

@@ -77,8 +77,8 @@ public class SimplePoolDataSourceFactory implements ObjectFactory {
         /*
              driver:             JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'<br>
              jdbcUrl:            JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'<br>
-             user:               Database login name.  e.g. 'Scott'<br>
-             password:           Database password.    e.g. 'Tiger'<br>
+             user:               Database login name. e.g. 'Scott'<br>
+             password:           Database password. e.g. 'Tiger'<br>
              minConns:           Minimum number of connections to start with.<br>
              maxConns:           Maximum number of connections in dynamic pool.<br>
              maxConnTime:        Time in days between connection resets. (Reset does a basic cleanup)<br>
