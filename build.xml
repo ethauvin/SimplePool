@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="simplepool" default="build" basedir=".">
     <property file="${basedir}/build.properties" />
+    <property name="path.jar.build" value="${path.build}/${jar.name}"/>
+    <property name="path.ex.build" value="${path.build}/${ex.name}"/>
     <path id="path.source">
         <pathelement location="${path.src}" />
     </path>
@@ -11,23 +13,33 @@
     </path>
     <target name="init">
         <tstamp />
-		<mkdir dir="${path.classes}"/>
+		<mkdir dir="${path.build}"/>
 		<mkdir dir="${path.dist}"/>
         <mkdir dir="${path.javadoc}"/>
     </target>
     <target name="compile" depends="init" description="Compiles sources">
-        <mkdir dir="${path.classes}" />
-        <javac sourcepathref="path.source" classpathref="path.class" destdir="${path.classes}" debug="off" deprecation="on">
+        <mkdir dir="${path.jar.build}" />
+        <javac sourcepathref="path.source" classpathref="path.class" destdir="${path.jar.build}" debug="off" deprecation="on">
             <src refid="path.source" />
         </javac>
     </target>
     <target name="build" depends="clean,compile,jar" description="Rebuilds project" />
     <target name="jar" depends="compile" description="Builds the JAR">
-        <copy todir="${path.classes}">
+        <copy todir="${path.jar.build}">
             <fileset dir="${path.src}" includes="*.properties" />
         </copy>
-        <jar destfile="${basedir}/${path.dist}/${appname}.jar" basedir="${path.classes}" excludes="**/.dependency-info/**" />
+        <jar destfile="${basedir}/${path.dist}/${jar.name}.jar" basedir="${path.jar.build}" excludes="**/.dependency-info/**" />
     </target>
+	<target name="examples" depends="build" description="Builds the Examples WAR">
+		<copy todir="${path.ex.build}">
+			<fileset dir="${path.ex}"/>
+		</copy>
+		<copy file="${path.dist}/${jar.name}.jar" todir="${path.ex.build}/WEB-INF/lib/"/>
+		<touch>
+			<fileset dir="${path.ex.build}"/>
+		</touch>
+		<jar jarfile="${path.dist}/${ex.name}.war" basedir="${path.ex.build}"/>
+	</target>
 	<target name="javadoc" depends="init" description="Builds the Javadoc">
 		<delete quiet="true" includeEmptyDirs="true">
 			<fileset dir="${path.javadoc}" includes="*,*/**"/>
@@ -40,7 +52,7 @@
 	</target>
     <target name="clean" depends="init" description="Removes classses and javadoc">
 		<delete quiet="true" includeEmptyDirs="true">
-			<fileset dir="${path.classes}" includes="*,*/**"/>
+			<fileset dir="${path.build}" includes="*,*/**"/>
 			<fileset dir="${path.dist}" includes="*,*/**"/>
             <fileset dir="${path.javadoc}" includes="*,*/**"/>
 		</delete>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+    <!DOCTYPE web-app PUBLIC
+    "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <description>SimplePool Examples</description>
+  
+  <!--
+  <servlet>
+    <servlet-name>SimplePoolServlet</servlet-name>
+    <servlet-class>net.java.dev.simplepool.SimplePoolServlet</servlet-class>
+    <init-param>
+      <param-name>varName</param-name>
+      <param-value>ServletPoolDS</param-value>
+    </init-param>
+    <init-param>
+      <param-name>driver</param-name>
+      <param-value>com.mysql.jdbc.Driver</param-value>
+    </init-param>
+    <init-param>
+      <param-name>user</param-name>
+      <param-value>dbuser</param-value>
+    </init-param>
+    <init-param>
+      <param-name>password</param-name>
+      <param-value>dbpassword</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jdbcUrl</param-name>
+      <param-value>jdbc:mysql://localhost:3306/dbname</param-value>
+    </init-param>
+    <init-param>
+      <param-name>minConns</param-name>
+      <param-value>8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxConns</param-name>
+      <param-value>30</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxConnTime</param-name>
+      <param-value>1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxCheckoutSeconds</param-name>
+      <param-value>60</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  -->
+  
+</web-app>
