@@ -1,7 +1,7 @@
 /*
  * $Source: /zpool01/javanet/scm/svn/tmp/cvs2svn/simplepool/src/net/java/dev/simplepool/SimplePoolConnection.java,v $
- * $Revision: 1.1 $
- * $Date: 2004-03-28 02:04:57 $
+ * $Revision: 1.2 $
+ * $Date: 2004-03-30 02:10:16 $
  *
  * Copyright (c) 2004, Russell Beattie (http://www.russellbeattie.com/)
  * All rights reserved.
@@ -47,7 +47,7 @@ import java.util.Map;
  *
  * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
  * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
- * @version $Revision: 1.1 $, $Date: 2004-03-28 02:04:57 $
+ * @version $Revision: 1.2 $, $Date: 2004-03-30 02:10:16 $
  * @since 1.0
  */
 public class SimplePoolConnection implements Connection {
@@ -60,9 +60,14 @@ public class SimplePoolConnection implements Connection {
      *
      * @param pool The connection pool.
      */
-    public SimplePoolConnection(SimplePool pool) {
+    public SimplePoolConnection(SimplePool pool)
+            throws SQLException {
         this.pool = pool;
         conn = pool.getConnection();
+        if (conn == null)
+        {
+            throw new SQLException("No connections currently available in the pool.");
+        }
     }
 
     /**

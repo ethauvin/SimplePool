@@ -1,7 +1,7 @@
 /*
  * $Source: /zpool01/javanet/scm/svn/tmp/cvs2svn/simplepool/src/net/java/dev/simplepool/SimplePool.java,v $
- * $Revision: 1.1 $
- * $Date: 2004-03-28 02:04:57 $
+ * $Revision: 1.2 $
+ * $Date: 2004-03-30 02:10:16 $
  *
  * Copyright (c) 2002, Marc A. Mnich (http://www.javaexchange.com/)
  * All rights reserved.
@@ -33,7 +33,7 @@ import java.util.Date;
  * @author <a href="http://www.javaexchange.com/">Marc A. Mnich</a>
  * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
  * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
- * @version $Revision: 1.1 $, $Date: 2004-03-28 02:04:57 $
+ * @version $Revision: 1.2 $, $Date: 2004-03-30 02:10:16 $
  * @since 1.0
  */
 public class SimplePool implements Runnable {
@@ -398,8 +398,9 @@ public class SimplePool implements Runnable {
             res = "freed " + conn.toString();
             log.debug("Freed connection [" + String.valueOf(thisconn) + ']');
         } else {
-            log.error("Could not free connection [" + String.valueOf(thisconn) + ']');
+            log.error("Could not free connection.");
         }
+
 
         return res;
 
