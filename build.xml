@@ -55,7 +55,7 @@
 			<tarfileset dir="${path.rel.build}" prefix="${release.name}" mode="644"/>
 		</tar>
 	</target>
-	<target name="src" depends="build" description="Builds the source archive">
+	<target name="src" description="Builds the source archive">
 		<tar tarfile="${path.dist}/${release.name}-src.tar.gz" compression="gzip">
 			<tarfileset dir="${basedir}" prefix="${release.name}">
 				<include name="${path.src}/**"/>
