@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="simplepool" default="build" basedir=".">
+    <property file="${basedir}/build.properties" />
+    <path id="path.source">
+        <pathelement location="${path.src}" />
+    </path>
+    <path id="path.class">
+		<fileset dir="${path.lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+    </path>
+    <target name="init">
+        <tstamp />
+		<mkdir dir="${path.classes}"/>
+		<mkdir dir="${path.dist}"/>
+    </target>
+    <target name="compile" depends="init" description="Compiles sources">
+        <mkdir dir="${path.classes}" />
+        <javac sourcepathref="path.source" classpathref="path.class" destdir="${path.classes}" debug="off" deprecation="on">
+            <src refid="path.source" />
+        </javac>
+    </target>
+    <target name="build" depends="clean,compile,jar" description="Rebuilds project" />
+    <target name="jar" depends="compile" description="Builds the JAR">
+        <copy todir="${path.classes}">
+            <fileset dir="${path.src}" includes="*.properties" />
+        </copy>
+        <jar destfile="${basedir}/${path.dist}/${appname}.jar" basedir="${path.classes}" excludes="**/.dependency-info/**" />
+    </target>
+    <target name="clean" depends="init" description="Removes classses and javadoc">
+		<delete quiet="true" includeEmptyDirs="true">
+			<fileset dir="${path.classes}" includes="*,*/**"/>
+			<fileset dir="${path.dist}" includes="*,*/**"/>
+		</delete>
+    </target>
+</project>

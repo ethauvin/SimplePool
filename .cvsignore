@@ -1,0 +1,7 @@
+*.ipr
+*.iml
+*.iws
+bin
+dist
+build
+classes
