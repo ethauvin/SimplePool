@@ -3,6 +3,7 @@
     <property file="${basedir}/build.properties" />
     <property name="path.jar.build" value="${path.build}/${jar.name}"/>
     <property name="path.ex.build" value="${path.build}/${ex.name}"/>
+    <property name="path.rel.build" value="${path.build}/${release.name}"/>
     <path id="path.source">
         <pathelement location="${path.src}" />
     </path>
@@ -39,6 +40,30 @@
 			<fileset dir="${path.ex.build}"/>
 		</touch>
 		<jar jarfile="${path.dist}/${ex.name}.war" basedir="${path.ex.build}"/>
+	</target>
+	<target name="release" depends="build,javadoc" description="Builds the release archives">
+		<mkdir dir="${path.rel.build}"/>
+		<copy todir="${path.rel.build}">
+			<fileset file="${path.dist}/${jar.name}.jar"/>
+			<fileset dir="${basedir}" includes="${path.javadoc}/**"/>
+		</copy>
+		<touch>
+			<fileset dir="${path.rel.build}"/>
+		</touch>
+		<zip destfile="${path.dist}/${release.name}.zip" basedir="${path.build}" includes="${release.name}/**"/>
+		<tar tarfile="${path.dist}/${release.name}.tar.gz" compression="gzip">
+			<tarfileset dir="${path.rel.build}" prefix="${release.name}" mode="644"/>
+		</tar>
+	</target>
+	<target name="src" depends="build" description="Builds the source archive">
+		<tar tarfile="${path.dist}/${release.name}-src.tar.gz" compression="gzip">
+			<tarfileset dir="${basedir}" prefix="${release.name}">
+				<include name="${path.src}/**"/>
+				<include name="${path.ex}/**"/>
+				<include name="${path.lib}/**"/>
+				<include name="build.*"/>
+			</tarfileset>
+		</tar>
 	</target>
 	<target name="javadoc" depends="init" description="Builds the Javadoc">
 		<delete quiet="true" includeEmptyDirs="true">
