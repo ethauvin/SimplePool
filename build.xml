@@ -34,6 +34,9 @@
 	<target name="examples" depends="build" description="Builds the Examples WAR">
 		<copy todir="${path.ex.build}">
 			<fileset dir="${path.ex}"/>
+			<filterset>
+      			<filter token="EX.NAME" value="${ex.name}"/>
+			</filterset>
 		</copy>
 		<copy file="${path.dist}/${jar.name}.jar" todir="${path.ex.build}/WEB-INF/lib/"/>
 		<touch>

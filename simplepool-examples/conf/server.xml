@@ -8,7 +8,7 @@
       <Host name="localhost" appBase="webapps">
       
         <!-- Define our application context -->
-        <Context path="/simplepool-examples" docBase="simplepool-examples"
+        <Context path="/@EX.NAME@" docBase="@EX.NAME@"
                  debug="5" reloadable="true" crossContext="true">
         
           <!-- Define our JDNI DataSource -->
