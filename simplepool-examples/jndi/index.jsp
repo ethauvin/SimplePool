@@ -61,15 +61,15 @@
           <p class="alert">The JNDI DataSource is defined as naming resource in the current webapp context, as shown in this minimal <a href="../source.jsp?file=conf/server.xml">server configuration file</a>. </p>
           <p>The JNDI DataSource is configured using the following parameters:</p>
             <ul>
-              <li>The <code class="info">varName</code> parameter is used to specify the name of the variable which will hold a reference to the DataSource object created by the Servlet.</li>
-              <li>The <code class="info">driver</code> parameter is used to specify the name of the JDBC driver class to be registered. For <code>example: com.mysql.jdbc.Driver</code>.</li>
+              <li>The <span class="info">varName</span> parameter is used to specify the name of the variable which will hold a reference to the DataSource object created by the Servlet.</li>
+              <li>The <span class="info">driver</span> parameter is used to specify the name of the JDBC driver class to be registered. For <code>example: com.mysql.jdbc.Driver</code>.</li>
               <li>The <span class="info">user</span> parameter is used to specify the database username, if any.</li>
-              <li>The <code class="info">password</code> parameter is used to specify the database password, if any.</li>
-              <li>The <code class="info">jdbcUrl</code> parameter is used to specify the JDBC URL associated with the database. For example: <code>jdbc:mysql://localhost:3306/dbname</code>.</li>
-              <li>The <code class="info">minConns</code> parameter is used to specify the minimum number of connections to start the pool with.</li>
-              <li>The <code class="info">maxConns</code> parameter is used to specify the maximum number of connections to be dynamically created in the pool.</li>
-              <li>The <code class="info">maxConnTime</code> parameter is used to specify the time (in days) between connection resets. The pool manager will perform a basic cleanup at the specified interval.</li>
-              <li>The <code class="info">maxCheckoutSeconds</code> parameter is used to specify the maximum time a connection can be checked out before being recycled. A zero value turns this option off.</li>
+              <li>The <span class="info">password</span> parameter is used to specify the database password, if any.</li>
+              <li>The <span class="info">jdbcUrl</span> parameter is used to specify the JDBC URL associated with the database. For example: <code>jdbc:mysql://localhost:3306/dbname</code>.</li>
+              <li>The <span class="info">minConns</span> parameter is used to specify the minimum number of connections to start the pool with.</li>
+              <li>The <span class="info">maxConns</span> parameter is used to specify the maximum number of connections to be dynamically created in the pool.</li>
+              <li>The <span class="info">maxConnTime</span> parameter is used to specify the time (in days) between connection resets. The pool manager will perform a basic cleanup at the specified interval.</li>
+              <li>The <span class="info">maxCheckoutSeconds</span> parameter is used to specify the maximum time a connection can be checked out before being recycled. A zero value turns this option off.</li>
             </ul>
             <p>Please note that <em>all parameters are required</em>.</p>
             <p class="alert">Please take a minute to incorporate the <a href="../source.jsp?file=conf/server.xml">JDNI DataSource example</a> in your <code>$CATALINE_HOME/conf/server.xml</code>. Once done, please restart Tomcat. The examples will be functional upon restart.</p>
