@@ -45,15 +45,29 @@ import javax.naming.spi.ObjectFactory;
 import java.util.Hashtable;
 
 /**
- * SimplePoolDataSourceFactory
+ * JNDI object factory that creates an instance of {@link SimplePoolDataSource}.
  *
- * @author Russell Beattie
- * @author Erik C. Thauvin
+ * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
+ * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
  * @version $Revision$, $Date$
  * @since 1.0
  */
 public class SimplePoolDataSourceFactory implements ObjectFactory {
-
+    /**
+     * Creates a SimplePool DataSource factory.
+     *
+     * @param obj  The object containing location or reference information that is used in creating the
+     *             <code>DataSource</code>.
+     * @param name The name of this object relative to <code>ctx</code>, or null if no name is specified.
+     * @param ctx  The context relative to which the <code>name</code> parameter is specified, or null if
+     *             <code>name</code> is relative to the default initial context.
+     * @param env  The possibly null environment that is used in creating the <code>DataSource</code>.
+     *
+     * @return The <code>DataSource</code>; null if it cannot be created.
+     *
+     * @throws Exception if the factory encountered an exception while attempting to create the <code>DataSource</code>,
+     *                   and no other object factories are to be tried.
+     */
     public Object getObjectInstance(Object obj, Name name, Context ctx, Hashtable env)
             throws Exception {
 
@@ -62,13 +76,14 @@ public class SimplePoolDataSourceFactory implements ObjectFactory {
 
         /*
              driver:             JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'<br>
-             jdbcUrl:                JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'<br>
+             jdbcUrl:            JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'<br>
              user:               Database login name.  e.g. 'Scott'<br>
              password:           Database password.    e.g. 'Tiger'<br>
              minConns:           Minimum number of connections to start with.<br>
              maxConns:           Maximum number of connections in dynamic pool.<br>
              maxConnTime:        Time in days between connection resets. (Reset does a basic cleanup)<br>
-             maxCheckoutSeconds: Max time a connection can be checked out before being recycled. Zero value turns option off, default is 60 seconds.
+             maxCheckoutSeconds: Max time a connection can be checked out before being recycled. Zero value turns option
+                                 off, default is 60 seconds.
         */
 
         String driver = (String) ref.get("driver").getContent();

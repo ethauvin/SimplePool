@@ -13,6 +13,7 @@
         <tstamp />
 		<mkdir dir="${path.classes}"/>
 		<mkdir dir="${path.dist}"/>
+        <mkdir dir="${path.javadoc}"/>
     </target>
     <target name="compile" depends="init" description="Compiles sources">
         <mkdir dir="${path.classes}" />
@@ -27,10 +28,21 @@
         </copy>
         <jar destfile="${basedir}/${path.dist}/${appname}.jar" basedir="${path.classes}" excludes="**/.dependency-info/**" />
     </target>
+	<target name="javadoc" depends="init" description="Builds the Javadoc">
+		<delete quiet="true" includeEmptyDirs="true">
+			<fileset dir="${path.javadoc}" includes="*,*/**"/>
+		</delete>
+		<javadoc sourcepath="${path.src}" destdir="${path.javadoc}" packagenames="${javadoc.packages}" windowtitle="${javadoc.title}" verbose="false" failonerror="true" additionalparam="">
+            <link href="${javadoc.api.link}"/>
+            <link href="${javadoc.servlet.link}"/>
+			<classpath refid="path.class"/>
+		</javadoc>
+	</target>
     <target name="clean" depends="init" description="Removes classses and javadoc">
 		<delete quiet="true" includeEmptyDirs="true">
 			<fileset dir="${path.classes}" includes="*,*/**"/>
 			<fileset dir="${path.dist}" includes="*,*/**"/>
+            <fileset dir="${path.javadoc}" includes="*,*/**"/>
 		</delete>
     </target>
 </project>

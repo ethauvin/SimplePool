@@ -28,11 +28,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * SimplePool
+ * Creates and manages a pool of database connections.
  *
- * @author Marc A. Mnich
- * @author Russell Beattie
- * @author Erik C. Thauvin
+ * @author <a href="http://www.javaexchange.com/">Marc A. Mnich</a>
+ * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
+ * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
  * @version $Revision$, $Date$
  * @since 1.0
  */
@@ -64,18 +64,20 @@ public class SimplePool implements Runnable {
 
 
     /**
-     * Creates a new Connection Broker<br>
-     * driver: JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'<br>
-     * jdbcUrl: JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'<br>
-     * user: Database login name. e.g. 'Scott'<br>
-     * password: Database password.  e.g. 'Tiger'<br>
-     * minConns: Minimum number of connections to start with.<br>
-     * maxConns: Maximum number of connections in dynamic pool.<br>
-     * maxConnTime: Time in days between connection resets. (Reset does a basic cleanup)<br>
-     * maxCheckoutSeconds: Max time a connection can be checked out before being recycled. Zero value turns option off, default is 60 seconds.
+     * Creates a new Connection Broker
+     *
+     * @param driver             JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'
+     * @param jdbcUrl            JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'
+     * @param user               Database login name. e.g. 'Scott'
+     * @param password           Database password.  e.g. 'Tiger'
+     * @param minConns           Minimum number of connections to start with.
+     * @param maxConns           Maximum number of connections in dynamic pool.
+     * @param maxConnTime        Time in days between connection resets. (Reset does a basic cleanup)
+     * @param maxCheckoutSeconds Max time a connection can be checked out before being recycled. Zero value turns option
+     *                           off, default is 60 seconds.
      */
     public SimplePool(String driver, String jdbcUrl, String user,
-                    String password, int minConns, int maxConns, double maxConnTime, int maxCheckoutSeconds)
+                      String password, int minConns, int maxConns, double maxConnTime, int maxCheckoutSeconds)
             throws IOException {
 
         this.connPool = new Connection[maxConns];
@@ -109,9 +111,9 @@ public class SimplePool implements Runnable {
         
         // Initialize the pool of connections with the mininum connections:
         // Problems creating connections may be caused during reboot when the
-        //    servlet is started before the database is ready.  Handle this
-        //    by waiting and trying again.  The loop allows 5 minutes for 
-        //    db reboot.
+        // servlet is started before the database is ready.  Handle this
+        // by waiting and trying again.  The loop allows 5 minutes for
+        // db reboot.
         boolean connectionsSucceeded = false;
         int dbLoop = 20;
 
@@ -154,12 +156,12 @@ public class SimplePool implements Runnable {
 
 
     /**
-     * Housekeeping thread.  Runs in the background with low CPU overhead.
-     * Connections are checked for warnings and closure and are periodically
-     * restarted.
-     * This thread is a catchall for corrupted
-     * connections and prevents the buildup of open cursors. (Open cursors
+     * Housekeeping thread.  Runs in the background with low CPU overhead. Connections are checked for warnings and
+     * closure and are periodically restarted.
+     * <p/>
+     * This thread is a catchall for corrupted connections and prevents the buildup of open cursors. (Open cursors
      * result when the application fails to close a Statement).
+     * <p/>
      * This method acts as fault tolerance for bad connection/statement programming.
      */
     public void run() {
@@ -271,17 +273,13 @@ public class SimplePool implements Runnable {
     } // End run
 
     /**
-     * This method hands out the connections in round-robin order.
-     * This prevents a faulty connection from locking
-     * up an application entirely.  A browser 'refresh' will
-     * get the next connection while the faulty
-     * connection is cleaned up by the housekeeping thread.
+     * This method hands out the connections in round-robin order. This prevents a faulty connection from locking up an
+     * application entirely. A browser 'refresh' will get the next connection while the faulty connection is cleaned up
+     * by the housekeeping thread.
      * <p/>
-     * If the min number of threads are ever exhausted, new
-     * threads are added up the the max thread count.
-     * Finally, if all threads are in use, this method waits
-     * 2 seconds and tries again, up to ten times.  After that, it
-     * returns a null.
+     * If the min number of threads are ever exhausted, new threads are added up the the max thread count. Finally, if
+     * all threads are in use, this method waits 2 seconds and tries again, up to ten times. After that, it returns a
+     * null.
      */
     public Connection getConnection() {
 
@@ -385,8 +383,7 @@ public class SimplePool implements Runnable {
     }
 
     /**
-     * Frees a connection.  Replaces connection back into the main pool for
-     * reuse.
+     * Frees a connection. Replaces connection back into the main pool for reuse.
      */
     public String freeConnection(Connection conn) {
         String res = "";
@@ -405,8 +402,7 @@ public class SimplePool implements Runnable {
     }
 
     /**
-     * Returns the age of a connection -- the time since it was handed out to
-     * an application.
+     * Returns the age of a connection -- the time since it was handed out to an application.
      */
     public long getAge(Connection conn) { // Returns the age of the connection in millisec.
         int thisconn = idOfConnection(conn);
@@ -435,31 +431,29 @@ public class SimplePool implements Runnable {
         log.debug("Opening connection [" + String.valueOf(i) +
                 "]: " + connPool[i].toString());
     }
-    
-    /**
-     * Shuts down the housekeeping thread and closes all connections 
-     * in the pool. Call this method from the destroy() method of the servlet.
-     */
 
     /**
-     * Multi-phase shutdown.  having following sequence:
-     * <OL>
-     * <LI><code>getConnection()</code> will refuse to return connections.
-     * <LI>The housekeeping thread is shut down.<br>
-     * Up to the time of <code>millis</code> milliseconds after shutdown of
-     * the housekeeping thread, <code>freeConnection()</code> can still be
-     * called to return used connections.
-     * <LI>After <code>millis</code> milliseconds after the shutdown of the
-     * housekeeping thread, all connections in the pool are closed.
-     * <LI>If any connections were in use while being closed then a
-     * <code>SQLException</code> is thrown.
-     * <LI>The log is closed.
-     * </OL><br>
+     * Shuts down the housekeeping thread and closes all connections in the pool. Call this method from the destroy()
+     * method of the servlet.
+     * <p/>
+     * Multi-phase shutdown having following sequence:
+     * </p>
+     * <ol>
+     * <li><code>getConnection()</code> will refuse to return connections.</li>
+     * <li>The housekeeping thread is shut down.<br>
+     * Up to the time of <code>millis</code> milliseconds after shutdown of the housekeeping thread,
+     * <code>freeConnection()</code> can still be called to return used connections.<br>
+     * After <code>millis</code> milliseconds after the shutdown of the housekeeping thread, all connections in the pool
+     * are closed.</li>
+     * <li>If any connections were in use while being closed then a <code>SQLException</code> is thrown.</li>
+     * <li>The log is closed.</li>
+     * </ol>
+     * <p/>
      * Call this method from a servlet destroy() method.
      *
      * @param millis the time to wait in milliseconds.
-     * @throws SQLException if connections were in use after
-     *                      <code>millis</code>.
+     *
+     * @throws SQLException if connections were in use after <code>millis</code>.
      */
     public void destroy(int millis) throws SQLException {
 
@@ -520,11 +514,10 @@ public class SimplePool implements Runnable {
 
 
     /**
-     * Less safe shutdown.  Uses default timeout value.
-     * This method simply calls the <code>destroy()</code> method
-     * with a <code>millis</code>
-     * value of 10000 (10 seconds) and ignores <code>SQLException</code>
-     * thrown by that method.
+     * Less safe shutdown. Uses default timeout value.
+     * <p/>
+     * This method simply calls the <code>destroy()</code> method with a <code>millis</code> value of 10000 (10 seconds)
+     * and ignores <code>SQLException</code> thrown by that method.
      *
      * @see #destroy(int)
      */
@@ -539,13 +532,11 @@ public class SimplePool implements Runnable {
 
     /**
      * Returns the number of connections in use.
+     * <p/>
+     * This method could be reduced to return a counter that is maintained by all methods that update connStatus.
+     * However, it is more efficient to do it this way because: Updating the counter would put an additional burden on
+     * the most frequently used methods; in comparison, this method is rarely used (although essential).
      */
-    // This method could be reduced to return a counter that is
-    // maintained by all methods that update connStatus.
-    // However, it is more efficient to do it this way because:
-    // Updating the counter would put an additional burden on the most
-    // frequently used methods; in comparison, this method is
-    // rarely used (although essential).
     public int getUseCount() {
         int useCount = 0;
         synchronized (connStatus) {

@@ -44,17 +44,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * SimplePoolDataSource
+ * Basic implementation of <code>javax.sql.DataSource</code>.
  *
- * @author Russell Beattie
- * @author Erik C. Thauvin
+ * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
+ * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
  * @version $Revision$, $Date$
  * @since 1.0
  */
 public class SimplePoolDataSource implements DataSource {
 
     protected PrintWriter logWriter = new PrintWriter(System.out);
-
     protected SimplePool broker = null;
 
     private String driver = "";
@@ -66,11 +65,12 @@ public class SimplePoolDataSource implements DataSource {
     private String maxConnTime = "";
     private String maxCheckoutSeconds = "";
 
-    public SimplePoolDataSource() {
-        ;
-    }
-
-    public void init() throws Exception {
+    /**
+     * Initializes the connection pool.
+     *
+     * @throws Exception if the pool could not be intialized.
+     */
+    protected void init() throws Exception {
 
         broker = new SimplePool(driver, jdbcUrl, user, password,
                 Integer.parseInt(minConns), Integer.parseInt(maxConns),
@@ -78,6 +78,11 @@ public class SimplePoolDataSource implements DataSource {
 
     }
 
+    /**
+     * See {@link javax.sql.DataSource#getConnection()}.
+     *
+     * @see javax.sql.DataSource#getConnection()
+     */
     public Connection getConnection() throws SQLException {
 
         if (broker == null) {
@@ -92,96 +97,169 @@ public class SimplePoolDataSource implements DataSource {
 
     }
 
-    public Connection getConnection(String user, String password)
+    /**
+     * See {@link javax.sql.DataSource#getConnection(String, String)}.
+     *
+     * @see javax.sql.DataSource#getConnection(String, String)
+     */
+    public Connection getConnection(String username, String password)
             throws SQLException {
 
         throw new SQLException("Not supported in this DataSource.");
 
     }
 
-    public void setLogWriter(PrintWriter output) throws SQLException {
-        logWriter = output;
+    /**
+     * See {@link javax.sql.DataSource#setLogWriter(PrintWriter)}.
+     *
+     * @see javax.sql.DataSource#setLogWriter(PrintWriter)
+     */
+    public void setLogWriter(PrintWriter out) throws SQLException {
+        logWriter = out;
     }
 
+    /**
+     * See {@link javax.sql.DataSource#getLogWriter}.
+     *
+     * @see javax.sql.DataSource#getLogWriter
+     */
     public PrintWriter getLogWriter() {
         return logWriter;
     }
 
+    /**
+     * See {@link javax.sql.DataSource#setLoginTimeout(int)}.
+     *
+     * @see javax.sql.DataSource#setLoginTimeout(int)
+     */
     public void setLoginTimeout(int seconds) throws SQLException {
     }
 
+    /**
+     * See {@link javax.sql.DataSource#getLoginTimeout}.
+     *
+     * @see javax.sql.DataSource#getLoginTimeout
+     */
     public int getLoginTimeout() {
         return 0;
     }
 
+    /**
+     * Closes the connection pool.
+     */
     public void close() {
         broker.destroy();
         broker = null;
     }
 
-
-// GET/SETs
-
+    /**
+     * Sets the JDBC driver.
+     */
     public void setDriver(String val) {
         driver = val;
     }
 
+    /**
+     * Gets the JDBC driver.
+     */
     public String getDriver() {
         return driver;
     }
 
+    /**
+     * Sets the JDBC connect string.
+     */
     public void setJdbcUrl(String val) {
         jdbcUrl = val;
     }
 
+    /**
+     * Sets the JDBC connect string.
+     */
     public String getJdbcUrl() {
         return jdbcUrl;
     }
 
+    /**
+     * Sets the database login name.
+     */
     public void setUser(String val) {
         user = val;
     }
 
+    /**
+     * Gets the database login name.
+     */
     public String getUser() {
         return user;
     }
 
+    /**
+     * Sets the database password.
+     */
     public void setPassword(String val) {
         password = val;
     }
 
+    /**
+     * Gets the database password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the minimum number of connections to start with.
+     */
     public void setMinConns(String val) {
         minConns = val;
     }
 
+    /**
+     * Gets the minimum number of connections to start with.
+     */
     public String getMinConns() {
         return minConns;
     }
 
+    /**
+     * Sets the maximum number of connections in dynamic pool.
+     */
     public void setMaxConns(String val) {
         maxConns = val;
     }
 
+    /**
+     * Gets the maximum number of connections in dynamic pool.
+     */
     public String getMaxConns() {
         return maxConns;
     }
 
+    /**
+     * Sets the time in days between connection resets.
+     */
     public void setMaxConnTime(String val) {
         maxConnTime = val;
     }
 
+    /**
+     * Gets the time in days between connection resets.
+     */
     public String getMaxConnTime() {
         return maxConnTime;
     }
 
+    /**
+     * Sets the max time a connection can be checked out before being recycled.
+     */
     public void setMaxCheckoutSeconds(String val) {
         maxCheckoutSeconds = val;
     }
 
+    /**
+     * Sets the max time a connection can be checked out before being recycled.
+     */
     public String getMaxCheckoutSeconds() {
         return maxCheckoutSeconds;
     }
