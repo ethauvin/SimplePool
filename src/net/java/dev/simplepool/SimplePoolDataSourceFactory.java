@@ -54,7 +54,7 @@ import java.util.Hashtable;
  */
 public class SimplePoolDataSourceFactory implements ObjectFactory {
     /**
-     * Creates a SimplePool DataSource factory.
+     * Creates a {@link SimplePoolDataSource} instance.
      *
      * @param obj  The object containing location or reference information that is used in creating the
      *             <code>DataSource</code>.
