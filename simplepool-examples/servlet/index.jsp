@@ -65,7 +65,7 @@
               <li>The <code class="info">maxCheckoutSeconds</code> initialization parameter is used to specify the maximum time a connection can be checked out before being recycled. A zero value turns this option off.</li>
             </ul>
             <p>Please note that <em>all parameters are required</em>.</p>
-            <p class="alert">Please take a minute to uncomment the <code>&lt;servlet/&gt;</code> declaration and configure the Servlet's initialization parameters in this webapp's <code>WEB-INF/web.xml</code>. Once done, please restart the webapp and/or Tomcat. The examples will be functional upon restart.</p>
+            <p class="alert">Please take a minute to uncomment the <code>&lt;servlet/&gt;</code> declaration and configure the Servlet's initialization parameters in this webapp's <code><a href="../source.jsp?file=WEB-INF/web.xml">WEB-INF/web.xml</a></code>. Once done, please restart the webapp and/or Tomcat. The examples will be functional upon restart.</p>
             <p>Please look at the [source] of the provided examples to understand how to access the connection pool from a scriptlet or using the JSTL SQL tags. The examples demonstrates how to list all of the tables contained in the specified database.</p>
           </div>
         </div>

@@ -13,7 +13,13 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <script language="javascript" type="text/javascript">
-	<% boolean enabled = (new InitialContext().lookup("java:comp/env/jdbc/JNDIPoolDS") != null); %>
+	<%
+		boolean enabled = false;
+			
+		try {
+			enabled = (new InitialContext().lookup("java:comp/env/jdbc/JNDIPoolDS") != null);
+		} catch (Exception ignore) { }
+	%>
 	function RTFM()
 	{
 		alert("Please read the instructions to enable this example.");
