@@ -1,4 +1,4 @@
-/**
+/*
  * $Source$
  * $Revision$
  * $Date$
@@ -44,7 +44,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Basic implementation of <code>javax.sql.DataSource</code>.
+ * Basic implementation of {@link javax.sql.DataSource}.
  *
  * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
  * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
@@ -53,8 +53,8 @@ import java.sql.SQLException;
  */
 public class SimplePoolDataSource implements DataSource {
 
-    protected PrintWriter logWriter = new PrintWriter(System.out);
-    protected SimplePool broker = null;
+    private PrintWriter logWriter = new PrintWriter(System.out);
+    private SimplePool pool = null;
 
     private String driver = "";
     private String jdbcUrl = "";
@@ -72,7 +72,7 @@ public class SimplePoolDataSource implements DataSource {
      */
     protected void init() throws Exception {
 
-        broker = new SimplePool(driver, jdbcUrl, user, password,
+        pool = new SimplePool(driver, jdbcUrl, user, password,
                 Integer.parseInt(minConns), Integer.parseInt(maxConns),
                 Double.parseDouble(maxConnTime), Integer.parseInt(maxCheckoutSeconds));
 
@@ -85,7 +85,7 @@ public class SimplePoolDataSource implements DataSource {
      */
     public Connection getConnection() throws SQLException {
 
-        if (broker == null) {
+        if (pool == null) {
             try {
                 init();
             } catch (Exception e) {
@@ -93,7 +93,7 @@ public class SimplePoolDataSource implements DataSource {
             }
         }
 
-        return new SimplePoolConnection(broker);
+        return new SimplePoolConnection(pool);
 
     }
 
@@ -148,8 +148,8 @@ public class SimplePoolDataSource implements DataSource {
      * Closes the connection pool.
      */
     public void close() {
-        broker.destroy();
-        broker = null;
+        pool.destroy();
+        pool = null;
     }
 
     /**

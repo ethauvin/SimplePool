@@ -1,4 +1,4 @@
-/**
+/*
  * $Source$
  * $Revision$
  * $Date$
@@ -64,7 +64,7 @@ public class SimplePool implements Runnable {
 
 
     /**
-     * Creates a new Connection Broker
+     * Creates a new Connection Broker.
      *
      * @param driver             JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'
      * @param jdbcUrl            JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'
