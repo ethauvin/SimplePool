@@ -78,8 +78,8 @@ public class SimplePool implements Runnable {
      *
      * @throws IOException If the pool cannot be created.
      */
-    public SimplePool(String driver, String jdbcUrl, String user,
-                      String password, int minConns, int maxConns, double maxConnTime, int maxCheckoutSeconds)
+    public SimplePool(String driver, String jdbcUrl, String user, String password, int minConns, int maxConns,
+                      double maxConnTime, int maxCheckoutSeconds)
             throws IOException {
 
         this.connPool = new Connection[maxConns];
@@ -129,8 +129,7 @@ public class SimplePool implements Runnable {
                     break;
                 } catch (SQLException e) {
 
-                    log.error("Attempt (" + String.valueOf(i) +
-                            " of " + String.valueOf(dbLoop) +
+                    log.error("Attempt (" + String.valueOf(i) + " of " + String.valueOf(dbLoop) +
                             ") failed to create new connections set at startup.", e);
                     log.warn("Will try again in 15 seconds...");
 
@@ -197,15 +196,11 @@ public class SimplePool implements Runnable {
                         if (connStatus[i] > 0) { // In use, catch it next time!
 
                             // Check the time it's been checked out and recycle
-                            long timeInUse = System.currentTimeMillis() -
-                                    connLockTime[i];
-                            log.warn("Connection [" + i +
-                                    "] in use for " + timeInUse +
-                                    " ms.");
+                            long timeInUse = System.currentTimeMillis() - connLockTime[i];
+                            log.warn("Connection [" + i + "] in use for " + timeInUse + " ms.");
                             if (maxCheckoutMillis != 0) {
                                 if (timeInUse > maxCheckoutMillis) {
-                                    log.warn("Connection [" +
-                                            i + "] failed to be returned in time. Recycling...");
+                                    log.warn("Connection [" + i + "] failed to be returned in time. Recycling...");
                                     throw new SQLException();
                                 }
                             }
@@ -237,7 +232,8 @@ public class SimplePool implements Runnable {
                     try {
                         connPool[i].close();
                     } catch (SQLException e0) {
-                        log.warn("Can't close connection [" + String.valueOf(i) + "]. Might have been closed already. Trying to recycle anyway...", e);
+                        log.warn("Can't close connection [" + String.valueOf(i) +
+                                "]. Might have been closed already. Trying to recycle anyway...", e);
                     }
 
                     try {
@@ -303,8 +299,7 @@ public class SimplePool implements Runnable {
 
                     do {
                         synchronized (connStatus) {
-                            if ((connStatus[roundRobin] < 1) &&
-                                    (!connPool[roundRobin].isClosed())) {
+                            if ((connStatus[roundRobin] < 1) && (!connPool[roundRobin].isClosed())) {
                                 conn = connPool[roundRobin];
                                 connStatus[roundRobin] = 1;
                                 connLockTime[roundRobin] = System.currentTimeMillis();
@@ -330,7 +325,6 @@ public class SimplePool implements Runnable {
                 } else {
                     synchronized (this) {  // Add new connections to the pool
                         if (currConnections < maxConns) {
-
                             try {
                                 createConn(currConnections);
                                 currConnections++;
@@ -346,8 +340,7 @@ public class SimplePool implements Runnable {
                         ;
                     }
 
-                    log.debug("Connections Exhausted. Will wait and try again in loop " +
-                            String.valueOf(outerloop));
+                    log.debug("Connections Exhausted. Will wait and try again in loop " + String.valueOf(outerloop));
                 }
 
             } // End of try 10 times loop
@@ -356,8 +349,7 @@ public class SimplePool implements Runnable {
             log.debug("Unsuccessful getConnection() request during destroy()");
         } // End if(available)
 
-        log.debug("Handing out connection [" +
-                idOfConnection(conn) + "]: " +
+        log.debug("Handing out connection [" + idOfConnection(conn) + "]: " +
                 (new SimpleDateFormat("MM/dd/yyyy  hh:mm:ss a")).format(new Date()));
 
         return conn;
@@ -444,8 +436,7 @@ public class SimplePool implements Runnable {
             log.debug("Error creating connection. The driver could not be loaded.", e2);
         }
 
-        log.debug("Opening connection [" + String.valueOf(i) +
-                "]: " + connPool[i].toString());
+        log.debug("Opening connection [" + String.valueOf(i) + "]: " + connPool[i].toString());
     }
 
     /**
@@ -520,7 +511,8 @@ public class SimplePool implements Runnable {
 
         if (useCount > 0) {
             //bt-test successful
-            String msg = "Unsafe shutdown: Had to close " + useCount + " active DB connections after " + millis + "ms.";
+            String msg = "Unsafe shutdown: Had to close " + useCount + " active DB connections after " + millis +
+                    "ms.";
             log.error(msg);
             // Throwing following Exception is essential because servlet authors
             // are likely to have their own error logging requirements.

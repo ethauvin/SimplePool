@@ -276,7 +276,8 @@ public class SimplePoolConnection implements Connection {
     /**
      * See {@link java.sql.Connection#prepareCall(String, int, int, int)}.
      */
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency,
+                                         int resultSetHoldability)
             throws SQLException {
         return conn.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
@@ -308,7 +309,8 @@ public class SimplePoolConnection implements Connection {
     /**
      * See {@link java.sql.Connection#prepareStatement(String, int, int, int)}.
      */
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability)
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency,
+                                              int resultSetHoldability)
             throws SQLException {
         return conn.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }

@@ -76,7 +76,8 @@ public class SimplePoolServlet extends HttpServlet {
      * The required intialization parameters are:
      * <p/>
      * <ul>
-     * <li><code>varName</code> &ndash; Name of the variable used to hold a reference to the {@link SimplePoolDataSource}.</li>
+     * <li><code>varName</code> &ndash; Name of the variable used to hold a reference to the
+     * {@link SimplePoolDataSource}.</li>
      * <li><code>driver</code> &ndash; JDBC driver. e.g. 'oracle.jdbc.driver.OracleDriver'</li>
      * <li><code>jdbcUrl</code> &ndash; JDBC connect string. e.g. 'jdbc:oracle:thin:@203.92.21.109:1526:orcl'</li>
      * <li><code>user</code> &ndash; Database login name. e.g. 'Scott'</li>
@@ -103,8 +104,8 @@ public class SimplePoolServlet extends HttpServlet {
         String maxConnTime = servletConfig.getInitParameter("maxConnTime");
         String maxCheckoutSeconds = servletConfig.getInitParameter("maxCheckoutSeconds");
 
-        if (isValid(varName) && isValid(driver) && isValid(jdbcUrl) && (user != null) && (password != null) &&
-                isValid(minConns) && isValid(maxConns) && isValid(maxConnTime) && isValid(maxCheckoutSeconds)) {
+        if (isValid(varName) && isValid(driver) && isValid(jdbcUrl) && (user != null) && (password != null)
+                && isValid(minConns) && isValid(maxConns) && isValid(maxConnTime) && isValid(maxCheckoutSeconds)) {
             dataSource = new SimplePoolDataSource();
 
             dataSource.setDriver(driver);
