@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="simplepool" default="build" basedir=".">
+    <property file="${basedir}/build.properties" />
+    <property name="path.jar.build" value="${path.build}/${jar.name}"/>
+    <property name="path.ex.build" value="${path.build}/${ex.name}"/>
+    <property name="path.rel.build" value="${path.build}/${release.name}"/>
+    <path id="path.source">
+        <pathelement location="${path.src}" />
+    </path>
+    <path id="path.class">
+		<fileset dir="${path.lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+    </path>
+    <target name="init">
+        <tstamp />
+		<mkdir dir="${path.build}"/>
+		<mkdir dir="${path.dist}"/>
+        <mkdir dir="${path.javadoc}"/>
+    </target>
+    <target name="compile" depends="init" description="Compiles sources">
+        <mkdir dir="${path.jar.build}" />
+        <javac sourcepathref="path.source" classpathref="path.class" destdir="${path.jar.build}" debug="off" deprecation="on">
+            <src refid="path.source" />
+        </javac>
+    </target>
+    <target name="build" depends="clean,compile,jar" description="Rebuilds project" />
+    <target name="jar" depends="compile" description="Builds the JAR">
+        <copy todir="${path.jar.build}">
+            <fileset dir="${path.src}" includes="*.properties" />
+        </copy>
+        <jar destfile="${basedir}/${path.dist}/${jar.name}.jar" basedir="${path.jar.build}" excludes="**/.dependency-info/**" />
+    </target>
+	<target name="examples" depends="build" description="Builds the Examples WAR">
+		<copy todir="${path.ex.build}">
+			<fileset dir="${path.ex}"/>
+			<filterset>
+      			<filter token="EX.NAME" value="${ex.name}"/>
+			</filterset>
+		</copy>
+		<copy file="${path.dist}/${jar.name}.jar" todir="${path.ex.build}/WEB-INF/lib/"/>
+		<touch>
+			<fileset dir="${path.ex.build}"/>
+		</touch>
+		<jar jarfile="${path.dist}/${ex.name}.war" basedir="${path.ex.build}"/>
+	</target>
+	<target name="release" depends="build,javadoc" description="Builds the release archives">
+		<mkdir dir="${path.rel.build}"/>
+		<copy todir="${path.rel.build}">
+			<fileset file="${path.dist}/${jar.name}.jar"/>
+			<fileset dir="${basedir}" includes="${path.javadoc}/**"/>
+		</copy>
+		<touch>
+			<fileset dir="${path.rel.build}"/>
+		</touch>
+		<zip destfile="${path.dist}/${release.name}.zip" basedir="${path.build}" includes="${release.name}/**"/>
+		<tar tarfile="${path.dist}/${release.name}.tar.gz" compression="gzip">
+			<tarfileset dir="${path.rel.build}" prefix="${release.name}" mode="644"/>
+		</tar>
+	</target>
+	<target name="src" description="Builds the source archive">
+		<tar tarfile="${path.dist}/${release.name}-src.tar.gz" compression="gzip">
+			<tarfileset dir="${basedir}" prefix="${release.name}">
+				<include name="${path.src}/**"/>
+				<include name="${path.ex}/**"/>
+				<include name="${path.lib}/**"/>
+				<include name="build.*"/>
+			</tarfileset>
+		</tar>
+	</target>
+	<target name="javadoc" depends="init" description="Builds the Javadoc">
+		<delete quiet="true" includeEmptyDirs="true">
+			<fileset dir="${path.javadoc}" includes="*,*/**"/>
+		</delete>
+		<javadoc sourcepath="${path.src}" destdir="${path.javadoc}" packagenames="${javadoc.packages}" windowtitle="${javadoc.title}" verbose="false" failonerror="true" additionalparam="">
+            <link href="${javadoc.api.link}"/>
+            <link href="${javadoc.servlet.link}"/>
+			<classpath refid="path.class"/>
+		</javadoc>
+	</target>
+    <target name="clean" depends="init" description="Removes classses and javadoc">
+		<delete quiet="true" includeEmptyDirs="true">
+			<fileset dir="${path.build}" includes="*,*/**"/>
+			<fileset dir="${path.dist}" includes="*,*/**"/>
+            <fileset dir="${path.javadoc}" includes="*,*/**"/>
+		</delete>
+    </target>
+</project>

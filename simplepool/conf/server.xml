@@ -1,0 +1,107 @@
+
+
+<Server port="8005" shutdown="SHUTDOWN" debug="0">
+
+  <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener" debug="0"/>
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" debug="0"/>
+
+  <GlobalNamingResources>
+
+    <Resource name="UserDatabase" auth="Container" type="org.apache.catalina.UserDatabase"/>
+
+    <ResourceParams name="UserDatabase">
+      <parameter>
+        <name>factory</name>
+        <value>org.apache.catalina.users.MemoryUserDatabaseFactory</value>
+      </parameter>
+      <parameter>
+        <name>pathname</name>
+        <value>conf/tomcat-users.xml</value>
+      </parameter>
+    </ResourceParams>
+
+
+    <Resource name="jdbc/PooledDS" type="javax.sql.DataSource" auth="Container"/>
+    
+    <ResourceParams name="jdbc/PooledDS">
+        <parameter>
+        	<name>factory</name>
+			<value>net.java.dev.simplepool.SimplePoolDataSourceFactory</value>
+        </parameter>
+        <parameter>
+            <name>driver</name>
+            <value>com.mysql.jdbc.Driver</value>
+        </parameter>
+        <parameter>
+            <name>user</name>
+            <value>dbuser</value>
+        </parameter>
+        <parameter>
+            <name>password</name>
+            <value>test</value>
+        </parameter>
+        <parameter>
+            <name>jdbcUrl</name>
+            <value>jdbc:mysql://localhost:3306/dbname</value>
+        </parameter>
+        <parameter>
+            <name>minConns</name>
+            <value>8</value>
+        </parameter>
+        <parameter>
+            <name>maxConns</name>
+            <value>30</value>
+        </parameter>
+        <parameter>
+            <name>maxConnTime</name>
+            <value>1</value>
+        </parameter>
+        <parameter>
+            <name>maxCheckoutSeconds</name>
+            <value>60</value>
+        </parameter>
+  
+    </ResourceParams>
+
+  </GlobalNamingResources>
+
+  <Service name="Catalina">
+
+    <Connector port="80"
+               maxThreads="150" 
+               minSpareThreads="25" 
+               maxSpareThreads="75"
+               enableLookups="false" 
+               redirectPort="8443" 
+               acceptCount="100"
+               debug="0" 
+               connectionTimeout="20000" 
+               proxyPort="80" 
+               />
+
+    
+    <Engine name="Catalina" defaultHost="www.waveblog.com" debug="0">
+
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                 debug="1" resourceName="UserDatabase"/>
+
+      <Host name="localhost" 
+      		debug="1" appBase="webapps" unpackWARs="true" autoDeploy="true" 
+      		xmlValidation="false" xmlNamespaceAware="false">		
+
+	        <Context path="" docBase="ROOT" debug="0" reloadable="true">
+				<ResourceLink name="jdbc/PooledDS" global="jdbc/PooledDS" type="javax.sql.DataSource" />
+	        </Context>
+
+      		<Valve className="org.apache.catalina.valves.AccessLogValve"
+                 directory="logs"  prefix="waveblog" suffix=".log"
+                 pattern="combined" resolveHosts="false"/>
+      
+      </Host>
+
+
+    </Engine>
+
+  </Service>
+
+</Server>
