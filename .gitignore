@@ -6,3 +6,5 @@ dist
 build
 classes
 javadoc
+/CVS/
+CVS

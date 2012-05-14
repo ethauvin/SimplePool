@@ -1,7 +1,7 @@
 /*
- * $Source$
- * $Revision$
- * $Date$
+ * $Source: /home/cvsroot/manywhere/simplepool/src/net/java/dev/simplepool/SimplePool.java,v $
+ * $Revision: 1.5 $
+ * $Date: 2004/03/17 23:35:36 $
  *
  * Copyright (c) 2002, Marc A. Mnich (http://www.javaexchange.com/)
  * All rights reserved.
@@ -33,7 +33,7 @@ import java.util.Date;
  * @author <a href="http://www.javaexchange.com/">Marc A. Mnich</a>
  * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
  * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
- * @version $Revision$, $Date$
+ * @version $Revision: 1.5 $, $Date: 2004/03/17 23:35:36 $
  * @since 1.0
  */
 public class SimplePool implements Runnable {

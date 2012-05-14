@@ -1,7 +1,7 @@
 /*
- * $Source$
- * $Revision$
- * $Date$
+ * $Source: /home/cvsroot/manywhere/simplepool/src/net/java/dev/simplepool/SimplePoolDataSourceFactory.java,v $
+ * $Revision: 1.5 $
+ * $Date: 2004/03/17 23:19:02 $
  *
  * Copyright (c) 2004, Russell Beattie (http://www.russellbeattie.com/)
  * All rights reserved.
@@ -49,7 +49,7 @@ import java.util.Hashtable;
  *
  * @author <a href="http://www.russellbeattie.com/">Russell Beattie</a>
  * @author <a href="http://www.thauvin.net/erik/">Erik C. Thauvin</a>
- * @version $Revision$, $Date$
+ * @version $Revision: 1.5 $, $Date: 2004/03/17 23:19:02 $
  * @since 1.0
  */
 public class SimplePoolDataSourceFactory implements ObjectFactory {
